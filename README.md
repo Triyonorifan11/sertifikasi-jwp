@@ -4,7 +4,7 @@
 This is a simple cashier application that can be used to manage a store's inventory and transactions. It is built using Laravel 10
 
 ## Installation
-1. Clone this repository to your local machine `git clone https://github.com/Triyonorifan11/sistem-toko-manpro.git`
+1. Clone this repository to your local machine `git clone https://github.com/Triyonorifan11/sertifikasi-jwp.git`
 2. Run `composer install`
 3. Run `php artisan app:init`
 

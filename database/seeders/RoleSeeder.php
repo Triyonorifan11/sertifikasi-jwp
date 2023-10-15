@@ -19,8 +19,6 @@ class RoleSeeder extends Seeder
                 'master_product' => true,
                 'master_user' => true,
                 'master_role' => true,
-                'master_customer' => true,
-                'master_supplier' => true,
                 'master_unit' => true,
                 'master_category' => true,
                 'sales_order' => true,
