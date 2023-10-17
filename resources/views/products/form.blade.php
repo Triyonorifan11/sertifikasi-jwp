@@ -36,7 +36,7 @@
                         <input id="product_stock" name="product_stock" id="product_stock" type="text" class="form-control" placeholder="100" aria-describedby="input-group-1" required value="{{ isset($product->product_stock) ? $product->product_stock : old('product_stock') }}">
                         <select data-placeholder="Select unit" class="tom-select w-full uppercase" name="unit_id" id="unit_id" required>
                             @foreach ($unit_id as $unit)
-                            <option value="{{ $unit->id }}" {{ isset($product->unit_id) ? ($product->unit_id == $unit->id ? 'selected' : '') : old('unit_id') }}>
+                            <option value="{{ $unit->id }}" {{ isset($product->unit_id) ? ($product->unit_id == Hashids::decode($unit->id)[0] ? 'selected' : '') : old('unit_id') }}>
                                 {{ $unit->unit_name }}
                             </option>
                             @endforeach
@@ -58,8 +58,14 @@
                 </div>
                 <div class="mt-3">
                     <label for="product_image" class="form-label font-bold">Product Image <span class="text-danger">*</span></label>
-                    <img src="{{ isset($product->product_image) ? $product->product_image : '' }}" alt="">
-                    <input id="product_image" type="file" class="form-control w-full" name="product_image" value="{{ isset($product->product_image) ? $product->product_image : old('product_image') }}" autocomplete="off">
+                    <div class="max-h-[50px] overflow-hidden">
+                        @if(isset($product))
+                        <img src="{{ isset($product->product_image) ? asset('storage/assets/images/product/'.$product->product_image) : url('assets/images/product/'.$product->product_image) }}" alt="Images Products" class="rounded">
+                        @else
+                        <img src="{{url('assets/images/product/default.jpg')}}" alt="Images Products" class="rounded" id="img_show">
+                        @endif
+                    </div>
+                    <input id="product_image" type="file" class="form-control w-full" name="product_image" value="{{ isset($product->product_image) ? $product->product_image : old('product_image') }}" autocomplete="off" onchange="img_load(event)">
                     @error('product_image')
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
@@ -106,10 +112,10 @@
                     @enderror
                 </div> --}}
                 <div>
-                    <select data-placeholder="Select user active" class="tom-select w-full" name="active" id="active" required>
-                        <option value="1" {{ isset($product->active) ? ($product->active == '1' ? 'selected' : '') : old('active') }}>
+                    <select data-placeholder="Select product active" class="tom-select w-full" name="product_status" id="product_status" required>
+                        <option value="active" {{ isset($product->product_status) ? ($product->product_status == 'active' ? 'selected' : '') : old('product_status') }}>
                             Active</option>
-                        <option value="0" {{ isset($product->active) ? ($product->active == '0' ? 'selected' : '') : old('active') }}>
+                        <option value="inactive" {{ isset($product->product_status) ? ($product->product_status == 'inactive' ? 'selected' : '') : old('product_status') }}>
                             Inactive</option>
 
                     </select>
@@ -122,10 +128,20 @@
     </div>
     <div class="intro-y col-span-12 p-5">
         <div class="text-right mt-5">
-            <a href="{{ url('/user') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+            <a href="{{ url('/products') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
             <button class="btn btn-primary w-24">Save</button>
         </div>
     </div>
     </div>
 </form>
+
+<script>
+    const img_load = function(e){
+        let img_show = document.getElementById('img_show');
+        img_show.src = URL.createObjectURL(e.target.files[0]);
+        img_show.onload = function(){
+            URL.revokeObjectURL(img_show.src)
+        }
+    }
+</script>
 @endsection

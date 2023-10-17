@@ -31,7 +31,7 @@ class ProductController extends Controller
         $data = [
             'title' => 'Form Master Products',
             'action' => 'New Data',
-            'product' => [],
+            // 'product' => '',
             'category_id' => Category::all(),
             'unit_id' => Unit::all(),
         ];
