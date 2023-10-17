@@ -30,6 +30,10 @@ class CategorySeeder extends Seeder
                 'category_name' => 'Peralatan',
                 "icon" => "fas fa-blender",
             ],
+            [
+                'category_name' => 'Baju',
+                "icon" => "fas fa-blender",
+            ]
         ];
         // insert data to database
         foreach ($initCategoryData as $category) {

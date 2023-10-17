@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Unit;
 use App\Services\MasterProductService;
+use Illuminate\Support\Facades\DB;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ProductController extends Controller
 {
@@ -45,7 +47,7 @@ class ProductController extends Controller
     {
         try {
             MasterProductService::create($request->all());
-            return redirect()->route('products.index')->with('success', 'Products deleted successfully');
+            return redirect()->route('products.index')->with('success', 'Products created successfully');
         } catch (\Throwable $th) {
             return redirect()->route('products.index')->with('error', $th->getMessage());
         }
@@ -64,12 +66,15 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . Hashids::decode($product->id)[0];
+
         $data = [
             'title' => 'Form Master Products',
             'action' => 'Edit Data',
             'product' => $product,
             'category_id' => Category::all(),
             'unit_id' => Unit::all(),
+            'amt_stock' => DB::select($query),
         ];
         return view('products.form', $data);
     }

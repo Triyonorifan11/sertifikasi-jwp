@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
@@ -44,5 +45,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/roles', RoleController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/products', ProductController::class);
+        Route::resource('/purchase-order', PurchaseOrderController::class);
     });
 });

@@ -14,18 +14,18 @@ class UnitSeeder extends Seeder
     {
         //
         $initUnitsData =[
-            [
-                'unit_name' => 'kg',
-            ],
-            [
-                'unit_name' => 'gram',
-            ],
-            [
-                'unit_name' => 'liter',
-            ],
-            [
-                'unit_name' => 'ml',
-            ],
+            // [
+            //     'unit_name' => 'kg',
+            // ],
+            // [
+            //     'unit_name' => 'gram',
+            // ],
+            // [
+            //     'unit_name' => 'liter',
+            // ],
+            // [
+            //     'unit_name' => 'ml',
+            // ],
             [
                 'unit_name' => 'pcs',
             ],

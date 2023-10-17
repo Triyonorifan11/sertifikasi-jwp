@@ -52,22 +52,22 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    //  add attribute hash_id
-    protected $appends = ['hash_id'];
+    // //  add attribute hash_id
+    // protected $appends = ['hash_id'];
 
-    public function getHashIdAttribute()
-    {
-        return Hashids::encode($this->attributes['id']);
-    }
+    // public function getHashIdAttribute()
+    // {
+    //     return Hashids::encode($this->attributes['id']);
+    // }
 
-    public function getRouteKeyName()
-    {
-        return 'hash_id';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'hash_id';
+    // }
 
-    public function resolveRouteBinding($value, $field = null)
-    {
-        return $this->findOrFail(Hashids::decode($value)[0]);
-    }
+    // public function resolveRouteBinding($value, $field = null)
+    // {
+    //     return $this->findOrFail(Hashids::decode($value)[0]);
+    // }
 
 }

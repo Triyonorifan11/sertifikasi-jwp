@@ -69,16 +69,16 @@
                     <a href="javascript:;" class="menu menu">
                         <div class="menu__icon"> <i data-lucide="inbox"></i> </div>
                         <div class="menu__title">
-                            Transactionn
+                            Transaction
                             <div class="menu__sub-icon transform rotate-180"> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
                     <ul class="menu__sub">
-                        @if(auth()->user()->role->master_category)
+                        @if(auth()->user()->role->purchase_order)
                         <li>
-                            <a href="{{url('/category')}}" class="menu">
+                            <a href="{{url('/purchase-order')}}" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Kategori </div>
+                                <div class="menu__title"> Purchase Order </div>
                             </a>
                         </li>
                         @endif
@@ -157,16 +157,16 @@
                         <a href="javascript:;" class="side-menu side-menu">
                             <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
                             <div class="side-menu__title">
-                                Transactionn
+                                Transaction
                                 <div class="side-menu__sub-icon transform rotate-180"> <i data-lucide="chevron-down"></i> </div>
                             </div>
                         </a>
                         <ul class="side-menu__sub">
-                            @if(auth()->user()->role->master_category)
+                            @if(auth()->user()->role->purchase_order)
                             <li>
-                                <a href="{{url('/category')}}" class="side-menu">
+                                <a href="{{url('/purchase-order')}}" class="side-menu">
                                     <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                    <div class="side-menu__title"> Kategori </div>
+                                    <div class="side-menu__title"> Purchase Order </div>
                                 </a>
                             </li>
                             @endif

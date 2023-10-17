@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Vinkla\Hashids\Facades\Hashids;
 class MasterProductService
@@ -38,8 +39,9 @@ class MasterProductService
     // show all data
     public static function show()
     {
-        $products = Product::with('units:unit_name', 'categories:category_name')->paginate(10);
-
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock, i.* FROM `products` i";
+        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->paginate(10);
+        // $products = DB::select($query);
         return $products;
     }
 

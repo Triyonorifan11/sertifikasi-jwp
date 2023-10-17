@@ -6,6 +6,7 @@
 <p class="text-gray-600">
     {{ $action }}
 </p>
+
 {{-- form add & delete --}}
 <form action="{{ isset($product->id) ? route('products.update', $product) : route('products.store') }}" method="post" enctype="multipart/form-data">
     @method(isset($product->id) ? 'PUT' : 'POST')
@@ -95,6 +96,11 @@
                         <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                </div>
+                <div class="mt-3">
+                    <label for="amt_stock" class="form-label font-bold">Amount Stok <span class="text-danger">*</span></label>
+                    <input id="amt_stock" type="text" class="form-control w-full" name="amt_stock" readonly value="{{ isset($amt_stock[0]->stock) ? $amt_stock[0]->stock : 0 }}" autocomplete="off">
+
                 </div>
                 <div class="mt-3">
                     <label for="product_description" class="form-label font-bold">Product Description <span class="text-danger">*</span></label>
