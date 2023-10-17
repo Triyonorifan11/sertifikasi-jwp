@@ -45,6 +45,9 @@ class UserMiddleware
         if (strpos($request->url(), url('/products')) === 0 && !$role->master_product) {
             return redirect()->route('no-access');
         }
+        if (strpos($request->url(), url('/view-product')) === 0 && !$role->view_product) {
+            return redirect()->route('no-access');
+        }
 
 
         return $next($request);

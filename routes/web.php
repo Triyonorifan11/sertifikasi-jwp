@@ -10,6 +10,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViewProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/roles', RoleController::class);
         Route::resource('/user', UserController::class);
         Route::resource('/products', ProductController::class);
+        Route::resource('/view-product', ViewProductController::class);
         Route::resource('/purchase-order', PurchaseOrderController::class);
     });
 });

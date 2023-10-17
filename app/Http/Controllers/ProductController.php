@@ -104,4 +104,5 @@ class ProductController extends Controller
             return redirect()->route('products.index')->with('error', $th->getMessage());
         }
     }
+
 }
