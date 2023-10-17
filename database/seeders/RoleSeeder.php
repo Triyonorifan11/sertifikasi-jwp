@@ -23,10 +23,8 @@ class RoleSeeder extends Seeder
                 'master_category' => true,
                 'sales_order' => true,
                 'purchase_order' => true,
-                'report_sales_order' => true,
-                'report_purchase_order' => true,
-                'report_stock' => true,
-                'report_profit_loss' => true,
+                'keranjang' => true,
+                'delivery_status' => true,
             ]);
     }
 }

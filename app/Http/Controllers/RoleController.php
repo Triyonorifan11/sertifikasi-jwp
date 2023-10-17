@@ -41,9 +41,12 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        $role = MasterRoleService::create($request->all());
-        return redirect()->route('roles.index')->with('success', 'Role created successfully');
-        //
+        try {
+            $role = MasterRoleService::create($request->all());
+            return redirect()->route('roles.index')->with('success', 'Role created successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('roles.index')->with('error', $th->getMessage());
+        }
     }
 
     /**

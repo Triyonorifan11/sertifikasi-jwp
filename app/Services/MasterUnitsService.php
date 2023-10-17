@@ -20,7 +20,7 @@ class MasterUnitsService
     // show all data
     public static function show()
     {
-        $units = Unit::all();
+        $units = Unit::paginate(10);
         return $units;
     }
 

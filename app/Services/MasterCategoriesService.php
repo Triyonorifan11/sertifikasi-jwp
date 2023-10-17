@@ -21,7 +21,7 @@ class MasterCategoriesService
     // show all data
     public static function show()
     {
-        $masterCategories = Category::paginate(3);
+        $masterCategories = Category::paginate(10);
         return $masterCategories;
     }
 

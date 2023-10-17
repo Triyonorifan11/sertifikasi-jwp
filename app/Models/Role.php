@@ -15,17 +15,13 @@ class Role extends Model
         'role_description',
         'master_category',
         'master_product',
-        'master_customer',
-        'master_supplier',
         'master_unit',
         'master_user',
         'master_role',
         'sales_order',
         'purchase_order',
-        'report_sales_order',
-        'report_purchase_order',
-        'report_stock',
-        'report_profit_loss',
+        'keranjang',
+        'delivery_status'
     ];
     // user
     public function users()

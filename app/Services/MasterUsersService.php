@@ -27,7 +27,7 @@ class MasterUsersService
     // show all data
     public static function show()
     {
-        $user = User::all();
+        $user = User::paginate(10);
         return $user;
     }
 

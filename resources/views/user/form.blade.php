@@ -54,7 +54,7 @@
                     <div class="">
                         <select data-placeholder="Select user role" class="tom-select w-full" name="role_id" id="role_id" required>
                             @foreach ($role_id as $role)
-                            <option value="{{ $role->id }}" {{ isset($user->role_id) ? ($user->role_id == $role->id ? 'selected' : '') : old('role_id') }}>
+                            <option value="{{ $role->id }}" {{ isset($user->role_id) ? ($user->role_id == Hashids::decode( $role->id)[0] ? 'selected' : '') : old('role_id') }}>
                                 {{ $role->role_name }}
                             </option>
                             @endforeach
