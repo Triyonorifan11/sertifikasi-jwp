@@ -15,6 +15,7 @@ class Role extends Model
         'role_description',
         'master_category',
         'master_product',
+        'view_product',
         'master_unit',
         'master_user',
         'master_role',

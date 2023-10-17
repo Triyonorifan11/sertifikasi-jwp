@@ -38,7 +38,7 @@ class MasterProductService
     // show all data
     public static function show()
     {
-        $products = Product::with('units:unit_name', 'categories:category_name')->get();
+        $products = Product::with('units:unit_name', 'categories:category_name')->paginate(10);
 
         return $products;
     }

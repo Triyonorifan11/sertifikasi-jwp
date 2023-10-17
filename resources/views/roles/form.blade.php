@@ -55,15 +55,23 @@
                         <div class="form-check mt-2"> <input @if (isset($role->master_category) ? $role->master_category : false) checked @endif
                                 id="master_categpry" name="master_category" class="form-check-input" type="checkbox"> <label
                                 class="form-check-label" for="master_categpry">Category</label> </div>
+
                         <div class="form-check mt-2"> <input @if (isset($role->master_unit) ? $role->master_unit : false) checked @endif
                                 id="master_unit" name="master_unit" class="form-check-input" type="checkbox"> <label
                                 class="form-check-label" for="master_unit">Unit</label> </div>
+
                         <div class="form-check mt-2"> <input @if (isset($role->master_product) ? $role->master_product : false) checked @endif
                                 id="master_product" name="master_product" class="form-check-input" type="checkbox"> <label
-                                class="form-check-label" for="master_product">Product</label> </div>
+                                class="form-check-label" for="master_product">Master Product</label> </div>
+
+                        <div class="form-check mt-2"> <input @if (isset($role->view_product) ? $role->view_product : false) checked @endif
+                                id="view_product" name="view_product" class="form-check-input" type="checkbox"> <label
+                                class="form-check-label" for="view_product">View Product</label> </div>
+
                         <div class="form-check mt-2"> <input @if (isset($role->master_role) ? $role->master_role : false) checked @endif
                                 id="master_role" name="master_role" class="form-check-input" type="checkbox"> <label
                                 class="form-check-label" for="master_role">Role</label> </div>
+
                         <div class="form-check mt-2"> <input @if (isset($role->master_user) ? $role->master_user : false) checked @endif
                                 id="master_user" name="master_user" class="form-check-input" type="checkbox"> <label
                                 class="form-check-label" for="master_user">User</label> </div>
@@ -87,8 +95,8 @@
                                 id="keranjang" name="keranjang" class="form-check-input" type="checkbox"> <label
                                 class="form-check-label" for="keranjang">Keranjang</label> </div>
                         <div class="form-check mt-2"> <input @if (isset($role->delivery_status) ? $role->delivery_status : false) checked @endif
-                                id="delivery_status" name="delivery_status" class="form-check-input" type="checkbox"> <label
-                                class="form-check-label" for="delivery_status">Delivery Status</label> </div>
+                                id="delivery_status" name="delivery_status" class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="delivery_status">Delivery Status</label> </div>
                     </div>
 
                 </div>

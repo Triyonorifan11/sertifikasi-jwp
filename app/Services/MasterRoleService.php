@@ -13,6 +13,7 @@ class MasterRoleService
         $role = new Role();
         isset($data['master_category'])=="ON" ? $data['master_category']=1 : $data['master_category']=0;
         isset($data['master_product'])=="ON" ? $data['master_product']=1 : $data['master_product']=0;
+        isset($data['view_product'])=="ON" ? $data['view_product']=1 : $data['view_product']=0;
         isset($data['master_unit'])=="ON" ? $data['master_unit']=1 : $data['master_unit']=0;
         isset($data['master_user'])=="ON" ? $data['master_user']=1 : $data['master_user']=0;
         isset($data['master_role'])=="ON" ? $data['master_role']=1 : $data['master_role']=0;
@@ -40,6 +41,7 @@ class MasterRoleService
         $role->role_description = $data['role_description'];
         $role->master_category = isset($data['master_category']) == "ON" ? 1 : 0;
         $role->master_product = isset($data['master_product']) == "ON" ? 1 : 0;
+        $role->view_product = isset($data['view_product']) == "ON" ? 1 : 0;
         $role->master_unit = isset($data['master_unit']) == "ON" ? 1 : 0;
         $role->master_user = isset($data['master_user']) == "ON" ? 1 : 0;
         $role->master_role = isset($data['master_role']) == "ON" ? 1 : 0;

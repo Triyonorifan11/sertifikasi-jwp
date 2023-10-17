@@ -17,6 +17,7 @@ class RoleSeeder extends Seeder
                 'role_name' => 'admin',
                 'role_description' => 'admin',
                 'master_product' => true,
+                'view_product' => true,
                 'master_user' => true,
                 'master_role' => true,
                 'master_unit' => true,

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('role_name')->unique();
             $table->string('role_description')->nullable();
             $table->boolean('master_product')->default(false);
+            $table->boolean('view_product')->default(false);
             $table->boolean('master_user')->default(false);
             $table->boolean('master_role')->default(false);
             // $table->boolean('master_customer')->default(false);
