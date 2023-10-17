@@ -30,17 +30,17 @@
                 </div>
                 <div class="mt-3">
                     <label for="po_qty" class="form-label font-bold">Quantity Produk <span class="text-danger">*</span></label>
-                    <input id="po_qty" type="number" class="form-control w-full" name="po_qty" placeholder="100" required value="{{isset($unit->po_qty) ? $unit->po_qty : old('po_qty')}}" autocomplete="off">
+                    <input id="po_qty" type="number" class="form-control w-full" name="po_qty" placeholder="100" required value="{{isset($po->po_qty) ? $po->po_qty : old('po_qty')}}" autocomplete="off">
                 </div>
                 <div class="mt-3">
-                    <label for="description" class="form-label font-bold">Deskription</label>
-                    <input id="description" type="text" class="form-control w-full" name="description" placeholder="Input text"  value="{{isset($unit->description) ? $unit->description : old('description')}}" autocomplete="off">
+                    <label for="description" class="form-label font-bold">Description</label>
+                    <input id="description" type="text" class="form-control w-full" name="description" placeholder="Input text"  value="{{isset($po->description) ? $po->description : old('description')}}" autocomplete="off">
                 </div>
             </div>
         </div>
         <div class="intro-y col-span-12 p-5">
             <div class="text-right mt-5">
-                <a href="{{url('/unit')}}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+                <a href="{{url('/purchase-order')}}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                 <button class="btn btn-primary w-24">Save</button>
             </div>
         </div>

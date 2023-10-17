@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class PurchaseOrder extends Model
 {
     use HasFactory;
-    use SoftDeletes;
     protected $guarded = ['id'];
     protected function id(): Attribute
     {

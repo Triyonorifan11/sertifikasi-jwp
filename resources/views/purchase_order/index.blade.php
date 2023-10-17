@@ -42,6 +42,7 @@
                 {{-- <th class="whitespace-nowrap">IMAGES</th> --}}
                     <th class="whitespace-nowrap">NO</th>
                     <th class="whitespace-nowrap">NO PO</th>
+                    <th class="whitespace-nowrap">DESCRIPTION</th>
                     <th class="text-center whitespace-nowrap">CREATED AT</th>
                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                 </tr>
@@ -69,6 +70,7 @@
                             <a class="font-medium whitespace-nowrap uppercase" href="{{route('purchase-order.edit',$item)}}"> {{$item->po_no}} </a> 
                         </div>
                     </td>
+                    <td class="text-center">{{$item->description}}</td>
                     <td class="text-center">{{$item->created_at->format('d/m/Y')}}</td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">

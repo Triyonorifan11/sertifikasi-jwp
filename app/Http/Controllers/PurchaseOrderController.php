@@ -59,7 +59,13 @@ class PurchaseOrderController extends Controller
      */
     public function edit(PurchaseOrder $purchaseOrder)
     {
-        //
+        $data = [
+            'title' => 'Form Purchase Order',
+            'action' => 'Edit Data',
+            'product' => Product::all(),
+            'po' => $purchaseOrder,
+        ];
+        return view('purchase_order.form', $data);
     }
 
     /**
@@ -67,7 +73,8 @@ class PurchaseOrderController extends Controller
      */
     public function update(UpdatePurchaseOrderRequest $request, PurchaseOrder $purchaseOrder)
     {
-        //
+        $po = PurchaseOrderService::update($request->all(), $purchaseOrder);
+        return redirect()->route('purchase-order.index')->with('success', 'Purchase Order updated successfully');
     }
 
     /**
@@ -75,6 +82,11 @@ class PurchaseOrderController extends Controller
      */
     public function destroy(PurchaseOrder $purchaseOrder)
     {
-        //
+        try {
+            PurchaseOrderService::delete($purchaseOrder);
+            return redirect()->route('purchase-order.index')->with('success', 'Purchase Order deleted successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('purchase-order.index')->with('error', $th->getMessage());
+        }
     }
 }

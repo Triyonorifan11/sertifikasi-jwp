@@ -39,4 +39,23 @@ class ActivityLogService
         self::log($subject,$description,$data);
     }
 
+    public static function logPOCreate($object,$data)
+    {
+        $subject = "Purchase Order Data";
+        $description = "Create ".$object;
+        self::log($subject,$description,$data);
+    }
+    public static function logPOUpdate($object,$data)
+    {
+        $subject = "Purchase Order Data";
+        $description = "Update ".$object;
+        self::log($subject,$description,$data);
+    }
+    public static function logPODelete($object,$data)
+    {
+        $subject = "Purchase Order Data";
+        $description = "Delete ".$object;
+        self::log($subject,$description,$data);
+    }
+
 }

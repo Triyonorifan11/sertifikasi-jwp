@@ -44,7 +44,7 @@
                     <th class="whitespace-nowrap">NO</th>
                     <th class="whitespace-nowrap">CODE</th>
                     <th class="whitespace-nowrap">NAME</th>
-                    <th class="whitespace-nowrap">STOK</th>
+                    <th class="whitespace-nowrap">STOK AVAILABLE</th>
                     <th class="text-center whitespace-nowrap">STATUS</th>
                     <th class="text-center whitespace-nowrap">ACTIONS</th>
                 </tr>
@@ -60,7 +60,7 @@
                             <a class="font-medium whitespace-nowrap" href="{{route('products.edit',$item)}}"> {{$item->product_name}} </a>
                         </div>
                     </td>
-                    <td class="whitespace-nowrap">{{$item->stock }} {{$item->unit->unit_name}}</td>
+                    <td class="whitespace-nowrap">{{$item->stock == null ? $item->product_stock : $item->stock }} {{$item->unit->unit_name}}</td>
                     <td class="text-center">{{$item->product_status}}</td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">

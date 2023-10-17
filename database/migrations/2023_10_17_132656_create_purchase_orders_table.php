@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('po_qty');
             $table->string('description')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
