@@ -25,6 +25,11 @@ class ProductController extends Controller
         return view('products.index', $data);
     }
 
+    public function getDataTable(){
+        $data = MasterProductService::showApi();
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

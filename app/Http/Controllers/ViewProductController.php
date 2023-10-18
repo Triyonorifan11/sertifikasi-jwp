@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Services\MasterProductService;
 use Illuminate\Http\Request;
 
@@ -30,9 +31,9 @@ class ViewProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Product $product)
     {
-        //
+        return $product;
     }
 
     /**

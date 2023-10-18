@@ -6,7 +6,9 @@ use App\Models\Product;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Vinkla\Hashids\Facades\Hashids;
+
 class MasterProductService
 {
     // Your service logic here
@@ -24,15 +26,15 @@ class MasterProductService
         $product->product_status = isset($data['product_status']) ? $data['product_status'] : 'inactive';
         if (isset($data['product_image'])) {
             $file = $data['product_image'];
-            $filename = $product->product_name.'_'. time() . '.' . $file->getClientOriginalExtension();
+            $filename = $product->product_name . '_' . time() . '.' . $file->getClientOriginalExtension();
             $folder = "assets/images/product";
             $file->storeAs($folder, $filename, 'public');
             $product->product_image = $filename;
-        }else{
+        } else {
             $product->product_image = 'default.jpg';
         }
         $product->save();
-        ActivityLogService::logMasterCreate('Product',$product);
+        ActivityLogService::logMasterCreate('Product', $product);
         return $product;
     }
 
@@ -41,6 +43,13 @@ class MasterProductService
     {
         $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock, i.* FROM `products` i";
         $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->paginate(10);
+        // $products = DB::select($query);
+        return $products;
+    }
+
+    public static function showApi()
+    {
+        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->get();
         // $products = DB::select($query);
         return $products;
     }
@@ -59,20 +68,20 @@ class MasterProductService
         $product->product_description = $data['product_description'];
         // image
         if (isset($data['product_image'])) {
-            // delete old image
+            // delete image
             $old_image = $product->product_image;
-            if($old_image != 'default.jpg'){
-                $path = public_path('assets/images/product/'.$old_image);
-                unlink($path);
+            if ($old_image != 'default.jpg') {
+                $path = '/assets/images/product/' . $old_image;
+                Storage::disk('public')->delete($path);
             }
             $file = $data['product_image'];
-            $filename = $product->product_name.'_'. time() . '.' . $file->getClientOriginalExtension();
+            $filename = $product->product_name . '_' . time() . '.' . $file->getClientOriginalExtension();
             $folder = "assets/images/product";
             $file->storeAs($folder, $filename, 'public');
             $product->product_image = $filename;
         }
         $product->save();
-        ActivityLogService::logMasterUpdate('Product',$product);
+        ActivityLogService::logMasterUpdate('Product', $product);
         return $product;
     }
 
@@ -81,12 +90,12 @@ class MasterProductService
     {
         // delete image
         $old_image = $product->product_image;
-        if($old_image != 'default.jpg'){
-            $path = public_path('assets/images/product/'.$old_image);
-            unlink($path);
+        if ($old_image != 'default.jpg') {
+            $path = '/assets/images/product/' . $old_image;
+            Storage::disk('public')->delete($path);
         }
         $product->delete();
-        ActivityLogService::logMasterDelete('Product',$product);
+        ActivityLogService::logMasterDelete('Product', $product);
         return $product;
     }
 }

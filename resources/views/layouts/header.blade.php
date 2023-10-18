@@ -12,5 +12,7 @@
     <!-- BEGIN: CSS Assets-->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> -->
     <link rel="stylesheet" href="{{url('assets/css/app.css')}}" />
+    <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
     <!-- END: CSS Assets-->
 </head>
