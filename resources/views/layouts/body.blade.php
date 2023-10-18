@@ -80,7 +80,7 @@
                             <li>
                                 <a href="{{ url('/purchase-order') }}" class="menu">
                                     <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                    <div class="menu__title"> Purchase Order </div>
+                                    <div class="menu__title"> Penambahan Stock </div>
                                 </a>
                             </li>
                         @endif
@@ -89,7 +89,7 @@
                 @if (auth()->user()->role->view_product)
                     <li>
                         <a href="{{url('/view-product')}}" class="menu">
-                            <div class="menu__icon"> <i data-lucide="inbox"></i> </div>
+                            <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
                             <div class="menu__title"> Explore Product </div>
                         </a>
                     </li>
@@ -180,7 +180,7 @@
                                 <li>
                                     <a href="{{ url('/purchase-order') }}" class="side-menu">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                        <div class="side-menu__title"> Purchase Order </div>
+                                        <div class="side-menu__title"> Penambahan Stock </div>
                                     </a>
                                 </li>
                             @endif
@@ -189,7 +189,7 @@
                     @if (auth()->user()->role->view_product)
                     <li>
                         <a href="{{url('/view-product')}}" class="side-menu">
-                            <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
+                            <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
                             <div class="side-menu__title"> Explore Product </div>
                         </a>
                     </li>

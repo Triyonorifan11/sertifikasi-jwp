@@ -228,28 +228,28 @@
                     // For print format
                     {
                         title: "PRODUCT NAME",
-                        field: "name",
+                        field: "product_name",
                         visible: false,
                         print: true,
                         download: true,
                     },
                     {
-                        title: "CATEGORY",
-                        field: "category",
+                        title: "CODE",
+                        field: "product_code",
                         visible: false,
                         print: true,
                         download: true,
                     },
                     {
                         title: "REMAINING STOCK",
-                        field: "remaining_stock",
+                        field: "stock",
                         visible: false,
                         print: true,
                         download: true,
                     },
                     {
                         title: "STATUS",
-                        field: "status",
+                        field: "product_status",
                         visible: false,
                         print: true,
                         download: true,
@@ -259,7 +259,7 @@
                     },
                     {
                         title: "IMAGE 1",
-                        field: "images",
+                        field: "product_image",
                         visible: false,
                         print: true,
                         download: true,
@@ -267,42 +267,12 @@
                             return cell.getValue()[0];
                         },
                     },
-                    {
-                        title: "IMAGE 2",
-                        field: "images",
-                        visible: false,
-                        print: true,
-                        download: true,
-                        formatterPrint(cell) {
-                            return cell.getValue()[1];
-                        },
-                    },
-                    {
-                        title: "IMAGE 3",
-                        field: "images",
-                        visible: false,
-                        print: true,
-                        download: true,
-                        formatterPrint(cell) {
-                            return cell.getValue()[2];
-                        },
-                    },
+                    
                 ],
-                renderComplete() {
-                    lucide.createIcons({
-                        "stroke-width": 1.5,
-                        nameAttr: "data-lucide",
-                    });
-                },
+                
+               
             });
-            // Redraw table onresize
-        window.addEventListener("resize", () => {
-            table.redraw();
-            lucide.createIcons({
-                "stroke-width": 1.5,
-                nameAttr: "data-lucide",
-            });
-        });
+       
         // Filter function
         function filterHTMLForm() {
             let field = $("#tabulator-html-filter-field").val();

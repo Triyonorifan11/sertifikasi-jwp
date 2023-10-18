@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Unit;
 use App\Services\MasterProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Vinkla\Hashids\Facades\Hashids;
 
 class ViewProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = [
-            'products' => MasterProductService::show(),
-            'title' => 'All Product Pixelshop'
+            'products' => MasterProductService::show($request),
+            'title' => 'All Product Pixelshop',
+            'category' => Category::all(),
         ];
         return view('products.index2', $data);
     }
@@ -41,7 +46,18 @@ class ViewProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . Hashids::decode($id)[0];
+        // return Product::find($id);
+        $data = [
+            'product' => MasterProductService::select(Hashids::decode($id))[0],
+            'title' => 'Detail Product',
+            'action' => 'Detail',
+            'category_id' => Category::all(),
+            'unit_id' => Unit::all(),
+            'amt_stock' => DB::select($query),
+        ];
+        
+        return view('products.detail', $data);
     }
 
     /**

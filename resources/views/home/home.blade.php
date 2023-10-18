@@ -2,7 +2,7 @@
 @section('content')
 <!-- Greet user with tailwiind  Hello, Name-->
 <h1 class="text-lg font-medium">
-    Hello, {{ Auth::user()->name }}. {{Auth::user()->id}}
+    Hello, {{ Auth::user()->name }}. {{Auth::user()->id}} {{Auth::user()->role->role_name}}
 </h1>
 <!-- Welcome back -->
 <p class="text-gray-600">

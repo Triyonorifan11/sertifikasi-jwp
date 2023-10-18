@@ -39,12 +39,17 @@ class MasterProductService
     }
 
     // show all data
-    public static function show()
+    public static function show($request)
     {
+        $cat_filter = $request->get('category_filter');
         $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock, i.* FROM `products` i";
-        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->paginate(10);
+        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'));
+        if($cat_filter){
+            $products->where('products.category_id', Hashids::decode($cat_filter)[0]);
+        }
         // $products = DB::select($query);
-        return $products;
+        $result = $products->orderBy('created_at', 'desc')->paginate(10);
+        return $result;
     }
 
     public static function showApi()
@@ -52,6 +57,10 @@ class MasterProductService
         $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->get();
         // $products = DB::select($query);
         return $products;
+    }
+
+    public static function select($id){
+        return Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->where('id', $id)->get();
     }
 
     // update data
