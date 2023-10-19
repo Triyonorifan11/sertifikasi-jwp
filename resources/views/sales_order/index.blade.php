@@ -69,7 +69,7 @@
                     </td> --}}
                     <td>
                         <div class="flex">
-                            <a class="font-medium whitespace-nowrap uppercase" href="#"> {{$item->sales_order_no}} </a> 
+                            <a class="font-medium whitespace-nowrap uppercase" href="{{route('sales-order.edit', $item)}}"> {{$item->sales_order_no}} </a> 
                         </div>
                     </td>
                     <td class="text-center">{{$item->created_at->format('d/m/Y')}}</td>

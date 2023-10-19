@@ -20,7 +20,9 @@ class MasterUsersService
         $user->role_id = Hashids::decode($data['role_id'])[0];
         $user->active = $data['active'];
         $user->save();
-        ActivityLogService::logMasterCreate('Users',$user);
+        if(auth()->user()){
+            ActivityLogService::logMasterCreate('Users',$user);
+        }
         return $user;
     }
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ErrorController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\ProductController;
@@ -30,17 +31,17 @@ use Illuminate\Support\Facades\Route;
 
 // AuthController login, auth
 Route::get('/no-access', [ErrorController::class, 'no_access'])->name('no-access');
+Route::post('/store_register', [AuthController::class, 'store_register']);
 Route::middleware(['logged'])->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 });
 // group middleware auth
 Route::middleware(['auth'])->group(function () {
     // HomeController index
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/', function () {
-        return view('home.home');
-    })->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::middleware(['user'])->group(function () {
         Route::resource('/category', CategoryController::class);
         Route::resource('/unit', UnitController::class);

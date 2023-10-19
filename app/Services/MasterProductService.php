@@ -11,6 +11,10 @@ use Vinkla\Hashids\Facades\Hashids;
 
 class MasterProductService
 {
+    public static function count_product(){
+        $cart = Product::all();
+        return $cart->count();
+    }
     // Your service logic here
     public static function create($data)
     {
@@ -48,7 +52,7 @@ class MasterProductService
             $products->where('products.category_id', Hashids::decode($cat_filter)[0]);
         }
         // $products = DB::select($query);
-        $result = $products->orderBy('created_at', 'desc')->paginate(10);
+        $result = $products->orderBy('created_at', 'desc')->paginate(12);
         return $result;
     }
 

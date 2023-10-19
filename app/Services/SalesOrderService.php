@@ -21,11 +21,15 @@ class SalesOrderService
     }
 
     public static function count_send(){
-        $cart = SalesOrder::where('user_id', Auth::user()->id)->where('status_so', 'Dikirim')->get();
+        $cart = SalesOrder::where('user_id', Auth::user()->id)->where('status_so', 'Diminta')->orWhere('status_so', 'Dikirim')->orWhere('status_so', 'Dikemas')->get();
         return $cart->count();
     }
     public static function count_pack(){
         $cart = SalesOrder::where('status_so', 'Diminta')->get();
+        return $cart->count();
+    }
+    public static function count_all(){
+        $cart = SalesOrder::all();
         return $cart->count();
     }
 
