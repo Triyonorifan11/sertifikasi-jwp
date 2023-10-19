@@ -67,7 +67,7 @@
                     <td class="text-center">{{$item->created_at->format('d/m/Y')}}</td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            <a class="flex items-center mr-3" href="{{route('keranjang.edit',$item)}}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Checkout </a>
+                            <a class="flex items-center mr-3" href="{{route('keranjang.show',$item)}}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Checkout </a>
                             <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal" onclick="deleteDataConfirm({{$item}})"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                         </div>
                     </td>

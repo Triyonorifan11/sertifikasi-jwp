@@ -9,8 +9,8 @@
 
     <form action="{{ route('keranjang.store') }}" method="post"id="add_mycart" class="inline">
         @csrf
-        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-        <input type="hidden" name="product_id" value="{{$keranjang->id}}">
+        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="hidden" name="product_id" value="{{ $keranjang->id }}">
         <div class="grid grid-cols-12 gap-6 mt-5 box">
             <div class="intro-y col-span-12 lg:col-span-6">
                 <div class="intro-y p-5">
@@ -64,10 +64,6 @@
                             {{-- <div id="input-group-1" class="input-group-text uppercase">{{ $keranjang->product->unit->unit_name }}</div> --}}
                         </div>
                     </div>
-                    <div class="mt-3">
-
-
-                    </div>
 
                     <div class="mt-3">
                         <label for="product_code" class="form-label font-bold">Product Code</label>
@@ -86,42 +82,62 @@
                             value="{{ isset($keranjang->product->category) ? $keranjang->product->category->category_name : old('category') }}"
                             disabled>
                     </div>
-                    
+                    <div class="mt-3">
+                        <label for="product_description" class="form-label font-bold">Product Description </label>
+                        <textarea id="product_description" type="text" class="form-control w-full  editor" name="product_description"
+                            placeholder="Description" required autocomplete="off" disabled>{{ isset($keranjang->product->product_description) ? $keranjang->product->product_description : old('product_description') }}</textarea>
+                        @error('product_description')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <div class="mt-3">
                         <label for="qty" class="form-label font-bold">Qty Checkout </label>
                         <input id="qty" id="qty" name="qty" type="number" required class="form-control"
-                            aria-describedby="input-group-1" value="{{$keranjang->qty}}">
+                            aria-describedby="input-group-1" value="{{ $keranjang->qty }}">
                         @error('qty')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="mt-3">
+                        <label for="qty" class="form-label font-bold">Pilih Metode Bayar </label>
+                        <select data-placeholder="Select" class="tom-select w-full" name="metode_bayar" id="metode_bayar" required>
+                            <option value="" disabled selected>pilih</option>
+                            <option value="ShopePay">ShopePay</option>
+                            <option value="Dana">Dana</option>
+                            <option value="Link Aja">Link Aja</option>
+    
+                        </select>
+                    </div>
 
                 </div>
             </div>
-            <div class="mt-3 col-span-12 p-5">
-                <label for="product_description" class="form-label font-bold">Product Description </label>
-                <textarea id="product_description" type="text" class="form-control w-full  editor" name="product_description"
-                    placeholder="Description" required autocomplete="off" disabled>{{ isset($keranjang->product->product_description) ? $keranjang->product->product_description : old('product_description') }}</textarea>
-                @error('product_description')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+            <div class="col-span-12 p-5">
+                <label for="product_description" class="form-label font-bold">Detail Checkout</label>
+                <div class="alert alert-primary show mb-2" role="alert">
+                    Total Yang dibayar : Rp <span id="total_bayar">{{number_format($total_price, 2, ',', '.')}}</span>
+                </div>
+
             </div>
             <div class="intro-y col-span-12 p-5">
                 <div class="text-right mt-5">
                     <a href="{{ url('/keranjang') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
-                    <button class="btn btn-primary w-36" id="add-cart" title="add to cart">Checkout</button>
+                    <button class="btn btn-primary w-36" id="add-cart" title="add to cart">Create Order</button>
                 </div>
             </div>
         </div>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
-        // const addcart = document.querySelector('#add-cart')
-        // addcart.addEventListener('click', function(e) {
-        //     const data = {
+        
 
-        //     }
-        //     console.log(data)
-        // })
+        const qty = $('#qty')
+        $('#qty').keyup(function(e) {
+            const price = {{ $keranjang->product->product_price }}
+            console.log(price);
+            const hasil = price * e.target.value
+            
+            $('#total_bayar').html(formatRupiah(hasil.toString()))
+        })
     </script>
 @endsection

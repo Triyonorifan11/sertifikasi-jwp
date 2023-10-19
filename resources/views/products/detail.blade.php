@@ -55,7 +55,7 @@
                         <div class="input-group">
                             <input id="product_minimum_stock" id="product_minimum_stock" name="product_minimum_stock"
                                 type="text" required class="form-control" aria-describedby="input-group-1"
-                                value="{{ isset($product->stock) ? $product->stock : $product->product_stock }}"
+                                value="{{ isset($product->stock) ? number_format($product->stock, 2, ',', '.'): number_format($product->product_stock, 2, ',', '.') }}"
                                 disabled>
                             @error('product_minimum_stock')
                                 <span class="text-danger">{{ $message }}</span>

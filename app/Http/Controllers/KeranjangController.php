@@ -59,14 +59,6 @@ class KeranjangController extends Controller
      */
     public function show(Keranjang $keranjang)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Keranjang $keranjang)
-    {
         $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . $keranjang->product_id;
         $data = [
             'keranjang' => $keranjang,
@@ -76,8 +68,28 @@ class KeranjangController extends Controller
             'unit_id' => Unit::all(),
             'amt_stock' => DB::select($query)[0],
             'count_my_cart' => KeranjangService::count(),
+            'total_price' => $keranjang->qty * $keranjang->product->product_price
         ];
         return view('cart.form', $data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Keranjang $keranjang)
+    {
+        // $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . $keranjang->product_id;
+        // $data = [
+        //     'keranjang' => $keranjang,
+        //     'title' => 'Detail Keranjang',
+        //     'action' => 'Detail',
+        //     'category_id' => Category::all(),
+        //     'unit_id' => Unit::all(),
+        //     'amt_stock' => DB::select($query)[0],
+        //     'count_my_cart' => KeranjangService::count(),
+        //     'total_price' => $keranjang->qty * $keranjang->product->product_price
+        // ];
+        // return view('cart.form', $data);
     }
 
     /**
