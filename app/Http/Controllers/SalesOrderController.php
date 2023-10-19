@@ -24,11 +24,6 @@ class SalesOrderController extends Controller
         ];
         return view('sales_order.index', $data);
     }
-
-    public function list_cust(){
-        
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -59,6 +54,7 @@ class SalesOrderController extends Controller
     {
       
     }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -84,16 +80,11 @@ class SalesOrderController extends Controller
     {
         try {
             SalesOrderService::updatestatus($request->all(), $salesOrder);
-            return redirect()->route('sales-order.index')->with('success', 'Status Sales updated successfully');
-        } catch (\Throwable $th) {
-            return redirect()->route('sales-order.index')->with('error', $th->getMessage());
-        }
-    }
-
-    public function send_so(SalesOrder $salesOrder){
-        try {
-            SalesOrderService::send_so($salesOrder);
-            return redirect()->route('sales-order.index')->with('success', 'Sales updated successfully');
+            if($request->status_so == 'Terkirim'){
+                return redirect()->route('my-order.index')->with('success', 'Status Sales updated successfully');
+            }else{
+                return redirect()->route('sales-order.index')->with('success', 'Status Sales updated successfully');
+            }
         } catch (\Throwable $th) {
             return redirect()->route('sales-order.index')->with('error', $th->getMessage());
         }

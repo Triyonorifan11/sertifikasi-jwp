@@ -113,9 +113,9 @@
                         </a>
                     </li>
                 @endif
-                @if (auth()->user()->role->keranjang)
+                @if (auth()->user()->role->delivery_status)
                     <li>
-                        <a href="{{url('/keranjang')}}" class="menu">
+                        <a href="{{url('/my-order')}}" class="menu">
                             <div class="menu__icon"> <i data-lucide="file-text"></i> </div>
                             <div class="menu__title"> My Order </div>
                         </a>
@@ -240,9 +240,9 @@
                         </a>
                     </li>
                     @endif
-                    @if (auth()->user()->role->sales_order)
+                    @if (auth()->user()->role->delivery_status)
                     <li>
-                        <a href="{{url('/listorder')}}" class="side-menu">
+                        <a href="{{url('/my-order')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
                             <div class="side-menu__title" id="my_cart"> My Order</div>
                         </a>

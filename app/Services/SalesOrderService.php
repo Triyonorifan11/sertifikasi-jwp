@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\SalesOrder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -13,6 +14,12 @@ class SalesOrderService
         $so = SalesOrder::paginate(10);
         return $so;
     }
+    public static function show2()
+    {
+        $so = SalesOrder::where('user_id', Auth::user()->id)->paginate(10);
+        return $so;
+    }
+
     public static function create($data){ 
         $so = new SalesOrder();
         // $so->sales_order_no = "SO-".date('y') . date('m'). '-'.date('his');
@@ -33,7 +40,11 @@ class SalesOrderService
 
     public static function updatestatus($data, $salesorder){
 
-        $salesorder->sales_order_no = "SO-".date('y') . date('m'). '-'.date('his');
+        if($data['status_so']=='Dikemas'){
+            $salesorder->sales_order_no = "SO-".date('y') . date('m'). '-'.date('his');
+        }else{
+            $salesorder->sales_order_no = $data['sales_order_no'];
+        }
         $salesorder->product_id = $data['product_id'];
         $salesorder->user_id = $data['user_id'];
         $salesorder->so_qty = $data['so_qty'];
@@ -47,8 +58,4 @@ class SalesOrderService
         $salesorder->save();
     }
 
-    public static function send_so($salesorder){
-        $salesorder->status_so = 'Dikirim';
-        $salesorder->save();
-    }
 }

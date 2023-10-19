@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ErrorController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\MyOrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RoleController;
@@ -52,5 +53,6 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/keranjang', KeranjangController::class);
         Route::resource('/purchase-order', PurchaseOrderController::class);
         Route::resource('/sales-order', SalesOrderController::class);
+        Route::resource('/my-order', MyOrderController::class);
     });
 });

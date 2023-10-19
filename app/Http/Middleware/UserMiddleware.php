@@ -54,6 +54,9 @@ class UserMiddleware
         if (strpos($request->url(), url('/keranjang')) === 0 && !$role->keranjang) {
             return redirect()->route('no-access');
         }
+        if (strpos($request->url(), url('/my-order')) === 0 && !$role->delivery_status) {
+            return redirect()->route('no-access');
+        }
 
 
         return $next($request);

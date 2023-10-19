@@ -151,7 +151,7 @@
             <div class="intro-y col-span-12 p-5">
                 <div class="text-right mt-5">
                     
-                    <a href="{{ url('/sales-order') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
+                    <a href="{{ url('/my-order') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
                     @if($salesOrder->status_so == 'Diminta' || $salesOrder->status_so == 'Dikemas')
                     <button class="btn btn-primary w-36" id="Kemas" title="add to cart"><i
                             data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> {{$salesOrder->status_so == 'Diminta' ? 'Packing': 'Send'}}</button>
