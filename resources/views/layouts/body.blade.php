@@ -104,7 +104,14 @@
                             <div class="menu__title"> My Cart </div>
                         </a>
                     </li>
-                    
+                @endif
+                @if (auth()->user()->role->keranjang)
+                    <li>
+                        <a href="{{url('/keranjang')}}" class="menu">
+                            <div class="menu__icon"> <i data-lucide="file-text"></i> </div>
+                            <div class="menu__title"> My Order </div>
+                        </a>
+                    </li>
                 @endif
 
                 <li class="menu__devider my-6"></li>
@@ -214,6 +221,14 @@
                         <a href="{{url('/keranjang')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
                             <div class="side-menu__title" id="my_cart"> My Cart <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_my_cart) ? $count_my_cart : ''}}</span> </div>
+                        </a>
+                    </li>
+                    @endif
+                    @if (auth()->user()->role->keranjang)
+                    <li>
+                        <a href="{{url('/keranjang')}}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
+                            <div class="side-menu__title" id="my_cart"> My Order </div>
                         </a>
                     </li>
                     @endif

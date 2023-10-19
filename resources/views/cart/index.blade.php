@@ -53,7 +53,7 @@
                     <td class="text-center w-10">{{$loop->iteration}}</td>
                     <td>
                         <div class="flex">
-                            <a class="font-medium whitespace-nowrap" href="{{route('keranjang.edit',$item)}}"> {{$item->product->product_name}} </a>
+                            <a class="font-medium whitespace-nowrap" href="{{route('keranjang.show',$item)}}"> {{$item->product->product_name}} </a>
                         </div>
                     </td>
                     <td class="w-40">

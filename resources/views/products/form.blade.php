@@ -62,7 +62,8 @@
                     <div class="max-h-[50px] overflow-hidden">
                         @if(isset($product))
                         <img src="{{ isset($product->product_image) ? asset('storage/assets/images/product/'.$product->product_image) : url('assets/images/product/'.$product->product_image) }}" alt="Images Products" class="rounded" id="img_show">
-                        
+                        @else
+                        <img src="{{url('assets/images/product/default.jpg') }}" alt="Images Products" class="rounded" id="img_show">
                         @endif
                     </div>
                     <input id="product_image" type="file" class="form-control w-full" name="product_image" value="{{ isset($product->product_image) ? $product->product_image : old('product_image') }}" autocomplete="off" onchange="img_load(event)">

@@ -91,15 +91,15 @@
                         @enderror
                     </div>
                     <div class="mt-3">
-                        <label for="qty" class="form-label font-bold">Qty Checkout </label>
-                        <input id="qty" id="qty" name="qty" type="number" required class="form-control"
+                        <label for="so_qty" class="form-label font-bold">Qty Checkout </label>
+                        <input id="so_qty" name="so_qty" type="number" required class="form-control"
                             aria-describedby="input-group-1" value="{{ $keranjang->qty }}">
-                        @error('qty')
+                        @error('so_qty')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mt-3">
-                        <label for="qty" class="form-label font-bold">Pilih Metode Bayar </label>
+                        <label for="metode_bayar" class="form-label font-bold">Pilih Metode Bayar <span class="text-danger">*</span></label>
                         <select data-placeholder="Select" class="tom-select w-full" name="metode_bayar" id="metode_bayar" required>
                             <option value="" disabled selected>pilih</option>
                             <option value="ShopePay">ShopePay</option>
@@ -108,7 +108,14 @@
     
                         </select>
                     </div>
-
+                    <div class="mt-3">
+                        <label for="detail_alamat" class="form-label font-bold">Detail Addres <span class="text-danger">*</span></label>
+                        <textarea id="detail_alamat" type="text" class="form-control w-full  editor" name="detail_alamat"
+                            placeholder="Detail Address" required autocomplete="off">{{old('detail_alamat')}}</textarea>
+                        @error('detail_alamat')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
             </div>
             <div class="col-span-12 p-5">
@@ -116,7 +123,7 @@
                 <div class="alert alert-primary show mb-2" role="alert">
                     Total Yang dibayar : Rp <span id="total_bayar">{{number_format($total_price, 2, ',', '.')}}</span>
                 </div>
-
+                <input type="hidden" name="total_amt" id="total_amt">
             </div>
             <div class="intro-y col-span-12 p-5">
                 <div class="text-right mt-5">
@@ -131,13 +138,18 @@
     <script>
         
 
-        const qty = $('#qty')
-        $('#qty').keyup(function(e) {
+        const qty = $('#so_qty')
+        $('#so_qty').change(function(e) {
             const price = {{ $keranjang->product->product_price }}
-            console.log(price);
             const hasil = price * e.target.value
-            
-            $('#total_bayar').html(formatRupiah(hasil.toString()))
+            if(e.target.value < 0){
+                $('#so_qty').val(0);
+                $('#total_bayar').html(0);
+                $('#total_amt').val(0)
+            }else{
+                $('#total_amt').val(hasil)
+                $('#total_bayar').html(formatRupiah(hasil.toString()))
+            }
         })
     </script>
 @endsection
