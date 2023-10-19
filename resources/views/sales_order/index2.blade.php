@@ -82,8 +82,11 @@
                     <td class="text-center">{{$item->status_so}}</td>
                     <td class="table-report__action w-56">
                         <div class="flex justify-center items-center">
-                            @if($item->status_so == 'Dikirim')
+                            @if($item->status_so == 'Dikirim' ||$item->status_so == 'Terkirim')
                             <a class="flex items-center text-success mr-2" href="{{route('my-order.edit', $item)}}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> {{$item->status_so == 'Dikirim' ? 'Accept Order' : 'Detail'}} </a>
+                            @endif
+                            @if($item->status_so == 'Terkirim')
+                                <a class="flex items-center text-primary mr-2" href="{{route('my-order.show', $item)}}"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Invoice </a>
                             @endif
                         </div>
                     </td>

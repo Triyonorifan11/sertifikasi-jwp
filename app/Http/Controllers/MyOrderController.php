@@ -43,7 +43,12 @@ class MyOrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = [
+            'salesOrder' => SalesOrder::where('id', Hashids::decode($id))->get()[0],
+            'title' => 'Sales Invoice',
+            'action' => 'Detail',
+        ];
+        return view('sales_order.invoice', $data);
     }
 
     /**
