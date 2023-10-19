@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/user', UserController::class);
         Route::resource('/products', ProductController::class);
         Route::resource('/view-product', ViewProductController::class);
-        Route::resource('/my-cart', KeranjangController::class);
+        Route::resource('/keranjang', KeranjangController::class);
         Route::resource('/purchase-order', PurchaseOrderController::class);
     });
 });

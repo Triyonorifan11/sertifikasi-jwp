@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Keranjang;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Vinkla\Hashids\Facades\Hashids;
@@ -13,13 +14,13 @@ class KeranjangService
     // Your service logic here
     public static function showApi()
     {
-        $products = Keranjang::with('user:name', 'product:product_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->get();
+        $products = Keranjang::with('user:name', 'product:product_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->where('user_id', Auth::user()->id)->get();
         // $products = DB::select($query);
         return $products;
     }
 
     public static function show(){
-        $cart =  Keranjang::paginate(10);
+        $cart =  Keranjang::where('user_id', Auth::user()->id)->paginate(10);
         return $cart;
     }
 
@@ -46,5 +47,10 @@ class KeranjangService
         $cart[0]->qty += $data['qty'];
         $cart[0]->user_id  = $data['user_id'];
         $cart[0]->save();
+    }
+
+    public static function delete($cart){
+        $cart->delete();
+        return $cart;
     }
 }

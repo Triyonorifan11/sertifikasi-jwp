@@ -97,7 +97,7 @@
                 @endif
                 @if (auth()->user()->role->keranjang)
                     <li>
-                        <a href="{{url('/my-cart')}}" class="menu">
+                        <a href="{{url('/keranjang')}}" class="menu">
                             <div class="menu__icon"> <i data-lucide="shopping-cart"></i> </div>
                             <div class="menu__title"> My Cart </div>
                         </a>
@@ -205,7 +205,7 @@
                     @endif
                     @if (auth()->user()->role->keranjang)
                     <li>
-                        <a href="{{url('/my-cart')}}" class="side-menu">
+                        <a href="{{url('/keranjang')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
                             <div class="side-menu__title"> My Cart </div>
                         </a>

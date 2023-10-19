@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Keranjang;
 use App\Http\Requests\StoreKeranjangRequest;
 use App\Http\Requests\UpdateKeranjangRequest;
+use App\Models\Category;
+use App\Models\Unit;
 use App\Services\KeranjangService;
 use App\Services\MasterProductService;
+use Illuminate\Support\Facades\DB;
+use Vinkla\Hashids\Facades\Hashids;
 
 class KeranjangController extends Controller
 {
@@ -16,7 +20,7 @@ class KeranjangController extends Controller
     public function index()
     {
         $data = [
-            'products' => KeranjangService::show(),
+            'cart' => KeranjangService::show(),
             'title' => 'My Cart'
         ];
         return view('cart.index', $data);
@@ -62,7 +66,16 @@ class KeranjangController extends Controller
      */
     public function edit(Keranjang $keranjang)
     {
-        //
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . $keranjang->product_id;
+        $data = [
+            'keranjang' => $keranjang,
+            'title' => 'Detail Keranjang',
+            'action' => 'Detail',
+            'category_id' => Category::all(),
+            'unit_id' => Unit::all(),
+            'amt_stock' => DB::select($query)[0],
+        ];
+        return view('cart.form', $data);
     }
 
     /**
@@ -78,6 +91,11 @@ class KeranjangController extends Controller
      */
     public function destroy(Keranjang $keranjang)
     {
-        //
+        try {
+            $delete = KeranjangService::delete($keranjang);
+            return redirect()->route('my-cart.index')->with('success', 'Cart deleted successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('my-cart.index')->with('error', $th->getMessage());
+        }
     }
 }
