@@ -15,6 +15,7 @@
                     class="w-8 h-8 text-white transform -rotate-90"></i> </a>
             <ul class="scrollable__content py-2">
                 <li>
+                    @if(auth()->user()->role->master_category || auth()->user()->role->master_unit ||auth()->user()->role->master_role || auth()->user()->role->master_user || auth()->user()->role->master_product)
                     <a href="javascript:;.html" class="menu">
                         <div class="menu__icon"> <i data-lucide="home"></i> </div>
                         <div class="menu__title">
@@ -22,6 +23,7 @@
                             <div class="menu__sub-icon transform rotate-180"> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
+                    @endif
                     <ul class="menu__sub">
                         @if (auth()->user()->role->master_category)
                             <li>
@@ -121,6 +123,7 @@
                 <ul>
 
                     <li>
+                        @if(auth()->user()->role->master_category || auth()->user()->role->master_unit ||auth()->user()->role->master_role || auth()->user()->role->master_user || auth()->user()->role->master_product)
                         <a href="javascript:;.html" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div class="side-menu__title">
@@ -129,6 +132,7 @@
                                         data-lucide="chevron-down"></i> </div>
                             </div>
                         </a>
+                        @endif
                         <ul class="side-menu__sub">
                             @if (auth()->user()->role->master_category)
                                 <li>
@@ -176,6 +180,7 @@
                     </li>
 
                     <li>
+                        @if(auth()->user()->role->purchase_order)
                         <a href="javascript:;" class="side-menu side-menu">
                             <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
                             <div class="side-menu__title">
@@ -184,6 +189,7 @@
                                         data-lucide="chevron-down"></i> </div>
                             </div>
                         </a>
+                        @endif
                         <ul class="side-menu__sub">
                             @if (auth()->user()->role->purchase_order)
                                 <li>
@@ -207,7 +213,7 @@
                     <li>
                         <a href="{{url('/keranjang')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
-                            <div class="side-menu__title"> My Cart </div>
+                            <div class="side-menu__title" id="my_cart"> My Cart <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_my_cart) ? $count_my_cart : ''}}</span> </div>
                         </a>
                     </li>
                     @endif

@@ -78,7 +78,7 @@
                         class="flex justify-center lg:justify-end items-center p-5 border-t border-slate-200/60 dark:border-darkmode-400">
                         <a class="flex items-center text-primary mr-auto" href="{{ route('view-product.show', $item) }}"> <i
                                 data-lucide="eye" class="w-4 h-4 mr-1"></i> Preview </a>
-                        <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
+                        <a class="flex items-center mr-3" href="{{route('view-product.show', $item)}}"> <i data-lucide="check-square"
                                 class="w-4 h-4 mr-1"></i> Add Cart </a>
 
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Services\KeranjangService;
 use App\Services\MasterCategoriesService;
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
     {
         $data = [
             'categories' => MasterCategoriesService::show(),
-            'title' => 'Master Category'
+            'title' => 'Master Category',
+            'count_my_cart' => KeranjangService::count(),
         ];
         return view('category.index', $data);
     }

@@ -24,6 +24,11 @@ class KeranjangService
         return $cart;
     }
 
+    public static function count(){
+        $cart = Keranjang::where('user_id', Auth::user()->id)->get();
+        return $cart->count();
+    }
+
     public static function create($data){
         $cart = new Keranjang();
         $cart = Keranjang::where('product_id', Hashids::decode($data['product_id'])[0])->where('user_id', $data['user_id'])->get();

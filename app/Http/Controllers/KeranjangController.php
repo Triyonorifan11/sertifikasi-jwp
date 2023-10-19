@@ -21,7 +21,8 @@ class KeranjangController extends Controller
     {
         $data = [
             'cart' => KeranjangService::show(),
-            'title' => 'My Cart'
+            'title' => 'My Cart',
+            'count_my_cart' => KeranjangService::count(),
         ];
         return view('cart.index', $data);
     }
@@ -45,7 +46,7 @@ class KeranjangController extends Controller
     public function store(StoreKeranjangRequest $request)
     {
         $result = KeranjangService::create($request->all());
-        return redirect()->route('my-cart.index')->with('success', 'Products add to cart successfully');
+        return redirect()->route('keranjang.index')->with('success', 'Products add to cart successfully');
         // try {
         // } catch (\Throwable $th) {
         //     return redirect()->route('my-cart.index')->with('error', $th->getMessage());
@@ -74,6 +75,7 @@ class KeranjangController extends Controller
             'category_id' => Category::all(),
             'unit_id' => Unit::all(),
             'amt_stock' => DB::select($query)[0],
+            'count_my_cart' => KeranjangService::count(),
         ];
         return view('cart.form', $data);
     }
@@ -93,9 +95,9 @@ class KeranjangController extends Controller
     {
         try {
             $delete = KeranjangService::delete($keranjang);
-            return redirect()->route('my-cart.index')->with('success', 'Cart deleted successfully');
+            return redirect()->route('keranjang.index')->with('success', 'Cart deleted successfully');
         } catch (\Throwable $th) {
-            return redirect()->route('my-cart.index')->with('error', $th->getMessage());
+            return redirect()->route('keranjang.index')->with('error', $th->getMessage());
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Unit;
+use App\Services\KeranjangService;
 use App\Services\MasterProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,7 @@ class ViewProductController extends Controller
             'products' => MasterProductService::show($request),
             'title' => 'All Product Pixelshop',
             'category' => Category::all(),
+            'count_my_cart' => KeranjangService::count(),
         ];
         return view('products.index2', $data);
     }
@@ -55,6 +57,7 @@ class ViewProductController extends Controller
             'category_id' => Category::all(),
             'unit_id' => Unit::all(),
             'amt_stock' => DB::select($query),
+            'count_my_cart' => KeranjangService::count(), 
         ];
         
         return view('products.detail', $data);
