@@ -7,6 +7,8 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Services\KeranjangService;
 use App\Services\MasterCategoriesService;
+use App\Services\SalesOrderService;
+
 class CategoryController extends Controller
 {
     /**
@@ -18,6 +20,7 @@ class CategoryController extends Controller
             'categories' => MasterCategoriesService::show(),
             'title' => 'Master Category',
             'count_my_cart' => KeranjangService::count(),
+            'count_need_order' => SalesOrderService::count_pack(),
         ];
         return view('category.index', $data);
     }

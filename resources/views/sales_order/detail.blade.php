@@ -60,12 +60,12 @@
                         <div class="input-group">
                             <input id="product_minimum_stock" id="product_minimum_stock" name="product_minimum_stock"
                                 type="text" required class="form-control" aria-describedby="input-group-1"
-                                value="{{ isset($amt_stock[0]->stock) ? number_format($amt_stock[0]->stock, 2, ',', '.'): number_format($$salesOrder->product->product_stock, 2, ',', '.') }}"
+                                value="{{ isset($amt_stock[0]->stock) ? number_format($amt_stock[0]->stock, 2, ',', '.'): number_format($salesOrder->product->product_stock, 2, ',', '.') }}"
                                 disabled>
                                 
                                 <div id="input-group-1" class="input-group-text uppercase">{{ $salesOrder->product->unit->unit_name }}</div>
                             </div>
-                            <span class="text-danger">Stok sudah dikurang qty</span>
+                          
                     </div>
 
                     <div class="mt-3">

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\MasterUsersService;
+use App\Services\SalesOrderService;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,7 +19,8 @@ class UserController extends Controller
     {
         $data = [
             'users' => MasterUsersService::show(),
-            'title' => 'Master Users'
+            'title' => 'Master Users',
+            'count_need_order' => SalesOrderService::count_pack(),
         ];
         return view('user.index', $data);
     }

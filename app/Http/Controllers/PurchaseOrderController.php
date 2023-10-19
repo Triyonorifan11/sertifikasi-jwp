@@ -7,6 +7,7 @@ use App\Http\Requests\StorePurchaseOrderRequest;
 use App\Http\Requests\UpdatePurchaseOrderRequest;
 use App\Models\Product;
 use App\Services\PurchaseOrderService;
+use App\Services\SalesOrderService;
 
 class PurchaseOrderController extends Controller
 {
@@ -17,7 +18,8 @@ class PurchaseOrderController extends Controller
     {
         $data = [
             'po' => PurchaseOrderService::show(),
-            'title' => 'Daftar Purchase Order'
+            'title' => 'Daftar Purchase Order',
+            'count_need_order' => SalesOrderService::count_pack(),
         ];
         return view('purchase_order.index', $data);
     }

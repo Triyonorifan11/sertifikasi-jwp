@@ -62,7 +62,7 @@ class MyOrderController extends Controller
     {
         $salesOrder = SalesOrder::where('id', Hashids::decode($id))->get();
 
-        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . $salesOrder[0]->product_id;
+        $query = "SELECT (i.product_stock + IFNULL((SELECT SUM(po_qty) FROM purchase_orders WHERE product_id = i.id GROUP BY product_id), 0) - IFNULL((SELECT SUM(so_qty) FROM sales_orders WHERE product_id = i.id GROUP BY product_id), 0)) AS stock FROM `products` i WHERE i.id = " . $salesOrder[0]->product_id;
         // return Product::find($id);
         $data = [
             'salesOrder' => $salesOrder[0],

@@ -24,6 +24,10 @@ class SalesOrderService
         $cart = SalesOrder::where('user_id', Auth::user()->id)->where('status_so', 'Dikirim')->get();
         return $cart->count();
     }
+    public static function count_pack(){
+        $cart = SalesOrder::where('status_so', 'Diminta')->get();
+        return $cart->count();
+    }
 
     public static function create($data){ 
         $so = new SalesOrder();

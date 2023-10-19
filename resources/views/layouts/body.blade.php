@@ -90,7 +90,7 @@
                             <li>
                                 <a href="{{ url('/sales-order') }}" class="menu">
                                     <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                    <div class="menu__title"> List Order </div>
+                                    <div class="menu__title"> List Order <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_need_order) ? $count_need_order : '0'}}</span> </div>
                                 </a>
                             </li>
                         @endif
@@ -109,7 +109,7 @@
                     <li>
                         <a href="{{url('/keranjang')}}" class="menu">
                             <div class="menu__icon"> <i data-lucide="shopping-cart"></i> </div>
-                            <div class="menu__title"> My Cart </div>
+                            <div class="menu__title"> My Cart <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_my_cart) ? $count_my_cart : '0'}}</span></div>
                         </a>
                     </li>
                 @endif
@@ -117,7 +117,7 @@
                     <li>
                         <a href="{{url('/my-order')}}" class="menu">
                             <div class="menu__icon"> <i data-lucide="file-text"></i> </div>
-                            <div class="menu__title"> My Order </div>
+                            <div class="menu__title"> My Order <span class="py-1 px-2 ml-2 rounded-full text-xs bg-warning text-white cursor-pointer font-medium"> {{isset($count_send_order) ? $count_send_order : '0'}}</span> </div>
                         </a>
                     </li>
                 @endif
@@ -218,7 +218,7 @@
                                 <li>
                                     <a href="{{ url('/sales-order') }}" class="side-menu">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                        <div class="side-menu__title"> List Order </div>
+                                        <div class="side-menu__title"> List Order <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_need_order) ? $count_need_order : '0'}}</span></div>
                                     </a>
                                 </li>
                             @endif

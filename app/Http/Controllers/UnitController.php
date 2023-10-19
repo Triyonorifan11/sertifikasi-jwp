@@ -6,6 +6,7 @@ use App\Models\Unit;
 use App\Http\Requests\StoreUnitRequest;
 use App\Http\Requests\UpdateUnitRequest;
 use App\Services\MasterUnitsService;
+use App\Services\SalesOrderService;
 
 class UnitController extends Controller
 {
@@ -17,7 +18,8 @@ class UnitController extends Controller
         //
         $data = [
             'units' => MasterUnitsService::show(),
-            'title' => 'Master Unit'
+            'title' => 'Master Unit',
+            'count_need_order' => SalesOrderService::count_pack(),
         ];
         return view('unit.index', $data);
     }

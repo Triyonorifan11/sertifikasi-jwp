@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Unit;
 use App\Services\MasterProductService;
+use App\Services\SalesOrderService;
 use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -20,7 +21,8 @@ class ProductController extends Controller
     {
         $data = [
             'products' => MasterProductService::show(),
-            'title' => 'Master Products'
+            'title' => 'Master Products',
+            'count_need_order' => SalesOrderService::count_pack(),
         ];
         return view('products.index', $data);
     }
