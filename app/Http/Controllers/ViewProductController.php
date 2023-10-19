@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Unit;
 use App\Services\KeranjangService;
 use App\Services\MasterProductService;
+use App\Services\SalesOrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\Facades\Hashids;
@@ -23,6 +24,7 @@ class ViewProductController extends Controller
             'title' => 'All Product Pixelshop',
             'category' => Category::all(),
             'count_my_cart' => KeranjangService::count(),
+            'count_send_order' => SalesOrderService::count_send()
         ];
         return view('products.index2', $data);
     }

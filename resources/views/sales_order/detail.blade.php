@@ -130,7 +130,7 @@
                     </div>
                     <div class="mt-3">
                         <label for="message_so" class="form-label font-bold">Message </label>
-                        <input id="message_so" id="message_so" name="message_so" type="number" required class="form-control"
+                        <input id="message_so" id="message_so" name="message_so" type="text" required class="form-control"
                             aria-describedby="input-group-1" value="{{$salesOrder->message_so}}" readonly>
                         @error('so_qty')
                             <span class="text-danger">{{ $message }}</span>
@@ -155,7 +155,7 @@
                     @if($salesOrder->status_so == 'Diminta' || $salesOrder->status_so == 'Dikemas')
                     <button class="btn btn-primary w-36" id="Kemas" title="add to cart"><i
                             data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> {{$salesOrder->status_so == 'Diminta' ? 'Packing': 'Send'}}</button>
-                    @elseif($salesOrder->status_so == 'Dikirim')
+                    @elseif($salesOrder->status_so == 'Dikirim' && Auth::user()->role->role_name == 'Pembeli')
                     <button class="btn btn-primary w-36" id="Kemas" title="add to cart"><i
                         data-lucide="shopping-bag" class="w-4 h-4 mr-2"></i> {{$salesOrder->status_so == 'Dikirim' ? 'Accept Order': ''}}</button>
                    @endif

@@ -20,6 +20,11 @@ class SalesOrderService
         return $so;
     }
 
+    public static function count_send(){
+        $cart = SalesOrder::where('user_id', Auth::user()->id)->where('status_so', 'Dikirim')->get();
+        return $cart->count();
+    }
+
     public static function create($data){ 
         $so = new SalesOrder();
         // $so->sales_order_no = "SO-".date('y') . date('m'). '-'.date('his');

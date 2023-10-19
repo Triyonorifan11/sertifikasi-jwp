@@ -236,7 +236,7 @@
                     <li>
                         <a href="{{url('/keranjang')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
-                            <div class="side-menu__title" id="my_cart"> My Cart <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_my_cart) ? $count_my_cart : ''}}</span> </div>
+                            <div class="side-menu__title" id="my_cart"> My Cart <span class="py-1 px-2 ml-2 rounded-full text-xs bg-success text-white cursor-pointer font-medium"> {{isset($count_my_cart) ? $count_my_cart : '0'}}</span> </div>
                         </a>
                     </li>
                     @endif
@@ -244,7 +244,7 @@
                     <li>
                         <a href="{{url('/my-order')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
-                            <div class="side-menu__title" id="my_cart"> My Order</div>
+                            <div class="side-menu__title" id="my_cart"> My Order <span class="py-1 px-2 ml-2 rounded-full text-xs bg-warning text-white cursor-pointer font-medium"> {{isset($count_send_order) ? $count_send_order : '0'}}</span></div>
                         </a>
                     </li>
                     @endif

@@ -7,7 +7,7 @@
         {{ $action }}
     </p>
 
-    <form action="{{ route('sales-order.store') }}" method="post"id="order" class="inline">
+    <form action="{{ url('/keranjang/store') }}" method="post"id="order" class="inline">
         @csrf
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         <input type="hidden" name="product_id" value="{{ $keranjang->product_id }}">

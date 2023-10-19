@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Keranjang;
 use App\Http\Requests\StoreKeranjangRequest;
+use App\Http\Requests\StoreSalesOrderRequest;
 use App\Http\Requests\UpdateKeranjangRequest;
 use App\Models\Category;
 use App\Models\Unit;
 use App\Services\KeranjangService;
 use App\Services\MasterProductService;
+use App\Services\SalesOrderService;
 use Illuminate\Support\Facades\DB;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -23,6 +25,7 @@ class KeranjangController extends Controller
             'cart' => KeranjangService::show(),
             'title' => 'My Cart',
             'count_my_cart' => KeranjangService::count(),
+            'count_send_order' => SalesOrderService::count_send()
         ];
         return view('cart.index', $data);
     }
@@ -52,6 +55,17 @@ class KeranjangController extends Controller
         //     return redirect()->route('my-cart.index')->with('error', $th->getMessage());
         // }
        
+    }
+
+    public function storeSO(StoreSalesOrderRequest $request){
+        try {
+            SalesOrderService::create($request->all());
+            $keranjang = Keranjang::where('id', Hashids::decode($request->keranjang_id)[0]);
+            KeranjangService::delete($keranjang);
+            return redirect()->route('keranjang.index')->with('success', 'Order created successfully'); // ganti ke my-order untuk pembeli
+        } catch (\Throwable $th) {
+            return redirect()->route('keranjang.index')->with('error', $th->getMessage());
+        }
     }
 
     /**

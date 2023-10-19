@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateSalesOrderRequest;
 use App\Models\SalesOrder;
+use App\Services\KeranjangService;
 use App\Services\SalesOrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +19,9 @@ class MyOrderController extends Controller
     {
         $data = [
             'so' => SalesOrderService::show2(),
-            'title' => 'My Order'
+            'title' => 'My Order',
+            'count_my_cart' => KeranjangService::count(),
+            'count_send_order' => SalesOrderService::count_send()
         ];
         return view('sales_order.index2', $data);
     }
@@ -73,9 +77,20 @@ class MyOrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSalesOrderRequest $request,SalesOrder $salesOrder)
     {
-        //
+        try {
+            $salesOrder = SalesOrder::find($salesOrder->id);
+            dd($salesOrder->status_so);
+            // SalesOrderService::updatestatus($request->all(), $salesOrder);
+            // if($request->status_so == 'Terkirim'){
+            //     return redirect()->route('my-order.index')->with('success', 'Status Sales updated successfully');
+            // }else{
+            //     return redirect()->route('sales-order.index')->with('success', 'Status Sales updated successfully');
+            // }
+        } catch (\Throwable $th) {
+            return redirect()->route('sales-order.index')->with('error', $th->getMessage());
+        }
     }
 
     /**

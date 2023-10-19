@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/products', ProductController::class);
         Route::resource('/view-product', ViewProductController::class);
         Route::resource('/keranjang', KeranjangController::class);
+        Route::post('/keranjang/store', [KeranjangController::class, 'storeSO']);
         Route::resource('/purchase-order', PurchaseOrderController::class);
         Route::resource('/sales-order', SalesOrderController::class);
         Route::resource('/my-order', MyOrderController::class);
