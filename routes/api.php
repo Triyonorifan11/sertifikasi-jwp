@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/category', [CategoryController::class, 'store']);
 Route::get('/product/getDataTable', [ProductController::class, 'getDataTable']);
+Route::get('/my-cart/getDataTable', [KeranjangController::class, 'getDataTable']);

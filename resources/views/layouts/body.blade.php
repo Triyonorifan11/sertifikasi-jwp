@@ -95,6 +95,15 @@
                     </li>
                     
                 @endif
+                @if (auth()->user()->role->keranjang)
+                    <li>
+                        <a href="{{url('/my-cart')}}" class="menu">
+                            <div class="menu__icon"> <i data-lucide="shopping-cart"></i> </div>
+                            <div class="menu__title"> My Cart </div>
+                        </a>
+                    </li>
+                    
+                @endif
 
                 <li class="menu__devider my-6"></li>
 
@@ -191,6 +200,14 @@
                         <a href="{{url('/view-product')}}" class="side-menu">
                             <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
                             <div class="side-menu__title"> Explore Product </div>
+                        </a>
+                    </li>
+                    @endif
+                    @if (auth()->user()->role->keranjang)
+                    <li>
+                        <a href="{{url('/my-cart')}}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
+                            <div class="side-menu__title"> My Cart </div>
                         </a>
                     </li>
                     @endif

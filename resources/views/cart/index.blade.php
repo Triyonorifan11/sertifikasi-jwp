@@ -8,7 +8,6 @@
     <!-- Welcome back -->
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <a href="{{ url('/products/create') }}" class="btn btn-primary shadow-md mr-2">Add New {{ $title }} </a>
             <div class="dropdown hidden">
                 <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
                     <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i>
@@ -112,7 +111,7 @@
     <script>
         if ($("#table_product").length) {
             let table = new Tabulator("#table_product", {
-                ajaxURL: "{{url('/api/product/getDataTable')}}",
+                ajaxURL: "{{url('/api/my-cart/getDataTable')}}",
                 ajaxFiltering: true,
                 ajaxSorting: true,
                 printAsHtml: true,
@@ -174,7 +173,7 @@
                         hozAlign: "center",
                         vertAlign: "middle",
                         print: false,
-                        download: false,
+                        download: false
                     },
                     {
                         title: "STOCK TOTAL",
@@ -198,9 +197,6 @@
                         formatter(cell, formatterParams) {
                             let a =
                                 $(`<div class="flex lg:justify-center items-center">
-                            <a class="edit flex items-center mr-3" href="/products/${cell.getData().id}/edit">
-                                <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
-                            </a>
                             <a class="delete flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal">
                                 <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
                             </a>
@@ -208,7 +204,6 @@
                         $(a)
                             .find(".delete")
                             .on("click", function () {
-                            
                                 deleteDataConfirm(cell.getData())
                             });
                         return a[0];
