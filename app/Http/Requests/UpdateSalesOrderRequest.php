@@ -23,12 +23,7 @@ class UpdateSalesOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'product_id' => 'required',
-            'user_id' => 'required',
-            'so_qty' => 'required|numeric',
-            'total_amt' => 'required|numeric',
-            'detail_alamat' => 'required|string',
-            'metode_bayar' => 'required|string',
+            
         ];
     }
 }

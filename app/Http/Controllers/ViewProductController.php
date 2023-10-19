@@ -48,7 +48,7 @@ class ViewProductController extends Controller
      */
     public function show(string $id)
     {
-        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . Hashids::decode($id)[0];
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . Hashids::decode($id)[0];
         // return Product::find($id);
         $data = [
             'product' => MasterProductService::select(Hashids::decode($id))[0],

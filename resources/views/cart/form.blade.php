@@ -7,10 +7,11 @@
         {{ $action }}
     </p>
 
-    <form action="{{ route('keranjang.store') }}" method="post"id="add_mycart" class="inline">
+    <form action="{{ route('sales-order.store') }}" method="post"id="order" class="inline">
         @csrf
         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-        <input type="hidden" name="product_id" value="{{ $keranjang->id }}">
+        <input type="hidden" name="product_id" value="{{ $keranjang->product_id }}">
+        <input type="hidden" name="keranjang_id" value="{{ $keranjang->id }}">
         <div class="grid grid-cols-12 gap-6 mt-5 box">
             <div class="intro-y col-span-12 lg:col-span-6">
                 <div class="intro-y p-5">
@@ -116,6 +117,14 @@
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="mt-3">
+                        <label for="message_so" class="form-label font-bold">Pesan</label>
+                        <input id="message_so" name="message_so" type="text" class="form-control"
+                            aria-describedby="input-group-1" value="">
+                        @error('message_so')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
             </div>
             <div class="col-span-12 p-5">
@@ -123,12 +132,12 @@
                 <div class="alert alert-primary show mb-2" role="alert">
                     Total Yang dibayar : Rp <span id="total_bayar">{{number_format($total_price, 2, ',', '.')}}</span>
                 </div>
-                <input type="hidden" name="total_amt" id="total_amt">
+                <input type="hidden" name="total_amt" id="total_amt" value="{{$total_price}}">
             </div>
             <div class="intro-y col-span-12 p-5">
                 <div class="text-right mt-5">
                     <a href="{{ url('/keranjang') }}" class="btn btn-outline-secondary w-24 mr-1">Cancel</a>
-                    <button class="btn btn-primary w-36" id="add-cart" title="add to cart">Create Order</button>
+                    <button class="btn btn-primary w-36" id="order" title="create order">Create Order</button>
                 </div>
             </div>
         </div>

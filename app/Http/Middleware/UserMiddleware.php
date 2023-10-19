@@ -48,6 +48,12 @@ class UserMiddleware
         if (strpos($request->url(), url('/view-product')) === 0 && !$role->view_product) {
             return redirect()->route('no-access');
         }
+        if (strpos($request->url(), url('/sales-order')) === 0 && !$role->sales_order) {
+            return redirect()->route('no-access');
+        }
+        if (strpos($request->url(), url('/keranjang')) === 0 && !$role->keranjang) {
+            return redirect()->route('no-access');
+        }
 
 
         return $next($request);

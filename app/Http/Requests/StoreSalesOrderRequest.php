@@ -25,8 +25,8 @@ class StoreSalesOrderRequest extends FormRequest
         return [
             'product_id' => 'required',
             'user_id' => 'required',
-            'so_qty' => 'required|numeric',
-            'total_amt' => 'required|numeric',
+            'so_qty' => 'required',
+            'total_amt' => 'required',
             'detail_alamat' => 'required|string',
             'metode_bayar' => 'required|string',
         ];

@@ -86,6 +86,14 @@
                                 </a>
                             </li>
                         @endif
+                        @if (auth()->user()->role->sales_order)
+                            <li>
+                                <a href="{{ url('/sales-order') }}" class="menu">
+                                    <div class="menu__icon"> <i data-lucide="activity"></i> </div>
+                                    <div class="menu__title"> List Order </div>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
                 @if (auth()->user()->role->view_product)
@@ -187,7 +195,7 @@
                     </li>
 
                     <li>
-                        @if(auth()->user()->role->purchase_order)
+                        @if(auth()->user()->role->purchase_order || auth()->user()->role->sales_order)
                         <a href="javascript:;" class="side-menu side-menu">
                             <div class="side-menu__icon"> <i data-lucide="inbox"></i> </div>
                             <div class="side-menu__title">
@@ -203,6 +211,14 @@
                                     <a href="{{ url('/purchase-order') }}" class="side-menu">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                         <div class="side-menu__title"> Penambahan Stock </div>
+                                    </a>
+                                </li>
+                            @endif
+                            @if (auth()->user()->role->sales_order)
+                                <li>
+                                    <a href="{{ url('/sales-order') }}" class="side-menu">
+                                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                        <div class="side-menu__title"> List Order </div>
                                     </a>
                                 </li>
                             @endif
@@ -224,14 +240,15 @@
                         </a>
                     </li>
                     @endif
-                    @if (auth()->user()->role->keranjang)
+                    @if (auth()->user()->role->sales_order)
                     <li>
-                        <a href="{{url('/keranjang')}}" class="side-menu">
-                            <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
-                            <div class="side-menu__title" id="my_cart"> My Order </div>
+                        <a href="{{url('/listorder')}}" class="side-menu">
+                            <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
+                            <div class="side-menu__title" id="my_cart"> My Order</div>
                         </a>
                     </li>
                     @endif
+                    
                 </ul>
             </nav>
             <!-- END: Side Menu -->

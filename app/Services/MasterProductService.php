@@ -42,8 +42,8 @@ class MasterProductService
     public static function show($request = null)
     {
         $cat_filter = $request ? $request->get('category_filter') : '';
-        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock, i.* FROM `products` i";
-        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'));
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = i.id group by product_id)) stock, i.* FROM `products` i";
+        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = products.id group by product_id)) stock, products.*'));
         if($cat_filter){
             $products->where('products.category_id', Hashids::decode($cat_filter)[0]);
         }
@@ -54,13 +54,13 @@ class MasterProductService
 
     public static function showApi()
     {
-        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->get();
+        $products = Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = products.id group by product_id)) stock, products.*'))->get();
         // $products = DB::select($query);
         return $products;
     }
 
     public static function select($id){
-        return Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id)) stock, products.*'))->where('id', $id)->get();
+        return Product::with('units:unit_name', 'categories:category_name')->select(DB::raw('(products.product_stock + (select sum(po_qty) from purchase_orders where product_id = products.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = products.id group by product_id)) stock, products.*'))->where('id', $id)->get();
     }
 
     // update data

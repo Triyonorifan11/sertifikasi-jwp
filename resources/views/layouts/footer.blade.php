@@ -40,6 +40,34 @@
 </div>
 <!-- END: Delete Confirmation Modal -->
 
+<!-- BEGIN: Delete Confirmation Modal -->
+<div id="send-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="p-5 text-center">
+                    <i data-lucide="send" class="w-16 h-16 text-primary mx-auto mt-3"></i> 
+                    <div class="text-3xl mt-5">Are you sure?</div>
+                    <div class="text-slate-500 mt-2 data_name">
+                        Do you really want to send these order? 
+                        <br>
+                        This process cannot be undone.
+                    </div>
+                </div>
+                <div class="px-5 pb-8 text-center">
+                    <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                    <form action="" method="post"id="form_send" class="inline">
+                        @method('put')
+                        @csrf
+                        <button class="btn btn-danger w-24" id="delete_this">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Delete Confirmation Modal -->
+
 
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script src="{{url('assets/js/app.js')}}"></script>
@@ -78,6 +106,13 @@
         const form_delete = document.querySelector('#form_delete');
         const url = window.location.pathname;
         form_delete.setAttribute('action', `${url}/${data_delete.id}`);
+    }
+    function sendSoDataConfirm(data){
+        const data_send = data;
+        const delete_this = document.querySelector('#delete_this');
+        const form_delete = document.querySelector('#form_send');
+        const url = window.location.pathname;
+        form_delete.setAttribute('action', `${url}/${data_send.id}`);
     }
 
     function formatRupiah(angka) {

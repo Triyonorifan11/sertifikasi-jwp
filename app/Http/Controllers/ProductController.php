@@ -71,7 +71,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . Hashids::decode($product->id)[0];
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . Hashids::decode($product->id)[0];
 
         $data = [
             'title' => 'Form Master Products',

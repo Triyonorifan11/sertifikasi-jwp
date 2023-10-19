@@ -20,7 +20,10 @@ return new class extends Migration
             $table->timestamp('order_date')->nullable();
             $table->decimal('total_amt');
             $table->string('detail_alamat');
+            $table->string('message_so')->nullable();
             $table->string('metode_bayar');
+            $table->timestamp('date_bayar')->nullable();
+            $table->string('status_so');
             $table->timestamps();
         });
     }

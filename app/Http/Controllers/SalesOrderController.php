@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\SalesOrder;
 use App\Http\Requests\StoreSalesOrderRequest;
 use App\Http\Requests\UpdateSalesOrderRequest;
+use App\Models\Keranjang;
+use App\Services\KeranjangService;
+use App\Services\SalesOrderService;
+use Illuminate\Support\Facades\DB;
+use Vinkla\Hashids\Facades\Hashids;
 
 class SalesOrderController extends Controller
 {
@@ -13,7 +18,15 @@ class SalesOrderController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'so' => SalesOrderService::show(),
+            'title' => 'Daftar Sales Order'
+        ];
+        return view('sales_order.index', $data);
+    }
+
+    public function list_cust(){
+        
     }
 
     /**
@@ -29,7 +42,14 @@ class SalesOrderController extends Controller
      */
     public function store(StoreSalesOrderRequest $request)
     {
-        //
+        try {
+            SalesOrderService::create($request->all());
+            $keranjang = Keranjang::where('id', Hashids::decode($request->keranjang_id)[0]);
+            KeranjangService::delete($keranjang);
+            return redirect()->route('keranjang.index')->with('success', 'Order created successfully'); // ganti ke my-order untuk pembeli
+        } catch (\Throwable $th) {
+            return redirect()->route('keranjang.index')->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -37,7 +57,7 @@ class SalesOrderController extends Controller
      */
     public function show(SalesOrder $salesOrder)
     {
-        //
+      
     }
 
     /**
@@ -45,7 +65,16 @@ class SalesOrderController extends Controller
      */
     public function edit(SalesOrder $salesOrder)
     {
-        //
+        $query = "SELECT (i.product_stock + (select sum(po_qty) from purchase_orders where product_id = i.id group by product_id) - (select sum(so_qty) from sales_orders where product_id = i.id group by product_id)) stock FROM `products` i WHERE i.id = " . $salesOrder->product_id;
+        // return Product::find($id);
+        $data = [
+            'salesOrder' => $salesOrder,
+            'title' => 'Detail Order',
+            'action' => 'Detail',
+            'amt_stock' => DB::select($query),
+        ];
+        
+        return view('sales_order.detail', $data);
     }
 
     /**
@@ -53,7 +82,21 @@ class SalesOrderController extends Controller
      */
     public function update(UpdateSalesOrderRequest $request, SalesOrder $salesOrder)
     {
-        //
+        try {
+            SalesOrderService::updatestatus($request->all(), $salesOrder);
+            return redirect()->route('sales-order.index')->with('success', 'Status Sales updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('sales-order.index')->with('error', $th->getMessage());
+        }
+    }
+
+    public function send_so(SalesOrder $salesOrder){
+        try {
+            SalesOrderService::send_so($salesOrder);
+            return redirect()->route('sales-order.index')->with('success', 'Sales updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('sales-order.index')->with('error', $th->getMessage());
+        }
     }
 
     /**
