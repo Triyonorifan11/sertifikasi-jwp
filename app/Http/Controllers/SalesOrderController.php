@@ -89,7 +89,7 @@ class SalesOrderController extends Controller
             <div class="mt-3">
                 <label class="form-label font-bold">Invoice : '.$salesOrder->sales_order_no.' </label> <br>
                 <label class="form-label font-bold">Product Name : '.$salesOrder->product->product_name.' </label> <br>
-                <label class="form-label font-bold">Product Price : '.$salesOrder->product->product_price.' </label> <br>
+                <label class="form-label font-bold">Product Price : Rp'.number_format($salesOrder->product->product_price, 2,',', '.').' </label> <br>
                 <label class="form-label font-bold">Product Code : '.$salesOrder->product->product_code.' </label> <br>
             </div>
         </div>';
