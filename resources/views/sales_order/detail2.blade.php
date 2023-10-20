@@ -3,6 +3,7 @@
     <h1 class="text-lg font-medium">
         {{ $title }}
     </h1>
+
     <p class="text-gray-600">
         {{ $action }}
     </p>

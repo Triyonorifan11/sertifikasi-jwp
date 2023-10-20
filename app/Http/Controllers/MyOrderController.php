@@ -81,7 +81,7 @@ class MyOrderController extends Controller
     {
         try {
             $salesOrder = SalesOrder::find($salesOrder->id);
-            dd($salesOrder->status_so);
+            // dd($salesOrder->status_so);
             // SalesOrderService::updatestatus($request->all(), $salesOrder);
             // if($request->status_so == 'Terkirim'){
             //     return redirect()->route('my-order.index')->with('success', 'Status Sales updated successfully');

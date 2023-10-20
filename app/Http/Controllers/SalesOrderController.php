@@ -80,9 +80,23 @@ class SalesOrderController extends Controller
      */
     public function update(UpdateSalesOrderRequest $request, SalesOrder $salesOrder)
     {
+        $request['emailRecipient'] = $salesOrder->user->email;
+        $request['emailSubject'] = "Sales Invoice From " . $salesOrder->sales_order_no;
+        $request['emailBody'] = '
+        <div>
+            <h1>This order detail</h1>
+            <p>===========================</p>
+            <div class="mt-3">
+                <label class="form-label font-bold">Invoice : '.$salesOrder->sales_order_no.' </label> <br>
+                <label class="form-label font-bold">Product Name : '.$salesOrder->product->product_name.' </label> <br>
+                <label class="form-label font-bold">Product Price : '.$salesOrder->product->product_price.' </label> <br>
+                <label class="form-label font-bold">Product Code : '.$salesOrder->product->product_code.' </label> <br>
+            </div>
+        </div>';
         try {
             SalesOrderService::updatestatus($request->all(), $salesOrder);
             if($request->status_so == 'Terkirim'){
+                MailController::composeEmail($request);
                 return redirect()->route('my-order.index')->with('success', 'Status Sales updated successfully');
             }else{
                 return redirect()->route('sales-order.index')->with('success', 'Status Sales updated successfully');
