@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->integer('so_qty');
             $table->timestamp('order_date')->nullable();
-            $table->decimal('total_amt');
+            $table->decimal('total_amt',16,2);
             $table->string('detail_alamat');
             $table->string('message_so')->nullable();
             $table->string('metode_bayar');

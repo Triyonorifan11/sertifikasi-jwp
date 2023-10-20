@@ -21,7 +21,7 @@ class SalesOrderService
     }
 
     public static function count_send(){
-        $cart = SalesOrder::where('user_id', Auth::user()->id)->where('status_so', 'Diminta')->orWhere('status_so', 'Dikirim')->orWhere('status_so', 'Dikemas')->get();
+        $cart = SalesOrder::where('status_so', 'Diminta')->orWhere('status_so', 'Dikirim')->orWhere('status_so', 'Dikemas')->where('user_id', Auth::user()->id)->get();
         return $cart->count();
     }
     public static function count_pack(){
